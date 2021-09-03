@@ -1,31 +1,31 @@
 package com.example.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-public class User {
+public class UserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @EmailExisting
     private String email;
 
+    @NotBlank
+    @Size(min = 2, max = 25, message = "Le prénom doit faire entre 5 et 25 caractères")
     private String firstName;
 
+    @NotBlank
+    @Size(min = 2, max = 25, message = "Le nom doit faire entre 5 et 25 caractères")
     private String lastName;
 
+    @NotBlank
+    @Size(min = 6, message = "Le mot de pase doit faire au moins 6 caractères")
     private String password;
 
-    public User() {
+    public UserDto() {
     }
 
-    public User(String email) {
+    public UserDto(String email) {
         this.email = email;
     }
 

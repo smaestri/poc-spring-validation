@@ -18,11 +18,12 @@ public class UserController {
     UserRepository userRepository;
 
     @PostMapping(value = "/users")
-    public ResponseEntity addUSer(@Valid @RequestBody User user, HttpServletResponse response) {
-
-        user.setEmail(user.getEmail());
-        user.setLastName(StringUtils.capitalize(user.getLastName()));
-        user.setFirstName(StringUtils.capitalize(user.getFirstName()));
+    public ResponseEntity addUSer(@Valid @RequestBody UserDto userDto, HttpServletResponse response) {
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        user.setLastName(StringUtils.capitalize(userDto.getLastName()));
+        user.setFirstName(StringUtils.capitalize(userDto.getFirstName()));
         userRepository.save(user);
 
         return new ResponseEntity(user, HttpStatus.CREATED);
